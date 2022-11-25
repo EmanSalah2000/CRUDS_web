@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8"/>
         <title>CRUDS</title>
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="index.css"/>
     </head>
     <body>
 
@@ -18,10 +18,10 @@
         <div class="input">
             <input type="text" id="title" placeholder="title">
             <div class="price">
-                <input type="number" id="price" placeholder="price">
-                <input type="number" id="taxes" placeholder="taxes">
-                <input type="number" id="ads" placeholder="ads">
-                <input type="number" id="discount" placeholder="discount">
+                <input onkeyup="getTotal()" type="number" id="price" placeholder="price">
+                <input  onkeyup="getTotal()" type="number" id="taxes" placeholder="taxes">
+                <input  onkeyup="getTotal()" type="number" id="ads" placeholder="ads">
+                <input   onkeyup="getTotal()" type="number" id="discount" placeholder="discount">
                 <small id="total">3323</small>
 
             </div>
@@ -117,7 +117,7 @@
 
 
 
-    <script src="index.css"></script>
+    <script src="index.js"></script>
     </body>
 
 

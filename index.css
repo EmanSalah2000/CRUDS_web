@@ -1,6 +1,5 @@
 /* for remove the margin and padding on the website  */
-*
-{
+*{
     padding: 0;
     margin: 0;
 }
