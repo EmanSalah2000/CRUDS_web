@@ -30,7 +30,33 @@ function getTotal()
     }
 }
 
-// function to create product
+// function to create 
+let data_product;
+if (localStorage.product !=null)
+{
+    data_product= JSON.parse(localStorage.product)
+}
+else{
+    data_product=[];
+}
+
+
+submit.onclick=function create()
+{
+new_product={
+    title : title.value,
+    price : price.value,
+    taxes : taxes.value,
+    ads   : ads.value,
+    discount :discount.value,
+    total : total.innerHTML,
+    count :count.value,
+    category: category.value,
+}
+data_product.push(new_product);
+localStorage.setItem('product',  JSON.stringify(data_product) );
+console.log(data_product);
+}
 
 // save data to localstorge
 

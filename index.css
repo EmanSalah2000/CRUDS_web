@@ -50,7 +50,7 @@ border-radius: 4px;
 }
 #total::before
 {
-    content: 'Total : ';
+    content: ' Total : ';
 }
 button
 {
