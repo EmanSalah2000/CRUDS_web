@@ -88,3 +88,7 @@ table th{
     text-transform: uppercase;
     padding:5px;
 }
+#deleteALL
+{
+    margin: 20px 0;
+}
