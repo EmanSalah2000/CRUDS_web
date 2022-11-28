@@ -47,16 +47,17 @@ else{
 submit.onclick=function ()
 {
 let new_product={
-    title : title.value,
+    title : title.value.toLowerCase(),
     price : price.value,
     taxes : taxes.value,
     ads   : ads.value,
     discount :discount.value,
     total : total.innerHTML,
     count :count.value,
-    category: category.value,
+    category: category.value.toLowerCase(),
 }
-// count of products
+if(title.value!='' && price.value!='' && category.value!='' && new_product.count<=100)
+{
 if  (mood ==='create')
 {
     if(new_product.count>1)
@@ -76,13 +77,15 @@ else{
     submit.innerHTML='Create';
     count.style.display='block';
 }
+cleardata()
+}
+
 
 localStorage.setItem('product',  JSON.stringify(data_product) )
 
 
 // console.log(data_product);
 
-cleardata()
 showData()
 }
 
@@ -104,7 +107,7 @@ function cleardata()
 
 }
 
-// read product
+
 
 function showData()
 {
@@ -112,7 +115,7 @@ function showData()
  for (let i=0 ;i <data_product.length ;i++)
  {
     table+=`<tr>
-    <td>${i}</td>
+    <td>${i+1}</td>
     <td>${data_product[i].title}</td>
     <td>${data_product[i].price}</td>
     <td>${data_product[i].taxes}</td>
@@ -140,14 +143,13 @@ let btndelete=document.getElementById('deleteALL');
 
 showData()
 
-//delete of product
+
 function delete_data(i){
 data_product.splice(i,1);
 localStorage.product =JSON.stringify(data_product);
 showData();
 }
 
-//delete All
 function deleteALL()
 {
     data_product.splice(0);
@@ -156,8 +158,6 @@ function deleteALL()
 }
 
 
-
-//update product
 function update_data(i)
 {
     title.value=data_product[i].title;
@@ -178,6 +178,75 @@ function update_data(i)
     
 }
 
-//search
+let search_mood='title';
+function get_search(id)
+{
+    let search=document.getElementById('search');
+    if(id=='searchTitle')
+    {
+        search_mood='title';
+        
+    }else{
+        search_mood='category';
+        
+    }
+    search.placeholder='Search By '+search_mood;
+    search.focus()
+    search.value='';
+    showData();
 
-//clean input data
+}
+function search_data(value)
+{
+    let table='';
+    for (let i=0 ;i<data_product.length;i++)
+    {
+                if (search_mood == 'title')
+                {
+                    
+                        if(data_product[i].title.includes(value.toLowerCase()))
+                        {
+                        
+                                    table+=`<tr>
+                                    <td>${i}</td>
+                                    <td>${data_product[i].title}</td>
+                                    <td>${data_product[i].price}</td>
+                                    <td>${data_product[i].taxes}</td>
+                                    <td>${data_product[i].ads}</td>
+                                    <td>${data_product[i].discount}</td>
+                                    <td>${data_product[i].total}</td>
+                                    <td>${data_product[i].category}</td>
+                                    <td><button onclick="update_data(${i})" id="update">update</button></td>
+                                    <td><button onclick="delete_data(${i})" id="delete">delete</button></td>
+                                </tr>
+                                </tr>`
+                        }
+
+                }else{
+
+
+                            if(data_product[i].category.includes(value.toLowerCase()))
+                            {
+                            
+                                        table+=`<tr>
+                                        <td>${i}</td>
+                                        <td>${data_product[i].title}</td>
+                                        <td>${data_product[i].price}</td>
+                                        <td>${data_product[i].taxes}</td>
+                                        <td>${data_product[i].ads}</td>
+                                        <td>${data_product[i].discount}</td>
+                                        <td>${data_product[i].total}</td>
+                                        <td>${data_product[i].category}</td>
+                                        <td><button onclick="update_data(${i})" id="update">update</button></td>
+                                        <td><button onclick="delete_data(${i})" id="delete">delete</button></td>
+                                    </tr>
+                                    </tr>`
+                                
+                            }
+                    }
+    
+    }
+document.getElementById('tbody').innerHTML=table;
+
+}
+
